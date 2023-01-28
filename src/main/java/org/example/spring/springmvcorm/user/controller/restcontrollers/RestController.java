@@ -78,7 +78,6 @@ public class RestController {
         studentsList.remove(index);
 
         updateIDs();
-
         return deletedStudent;
     }
 

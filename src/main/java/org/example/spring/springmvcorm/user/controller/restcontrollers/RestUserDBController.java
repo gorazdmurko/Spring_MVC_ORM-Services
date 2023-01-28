@@ -17,13 +17,13 @@ public class RestUserDBController {
     private IUserService service;
 
     // 1. get list of all users
-    @GetMapping("/user")
+    @GetMapping("/get")
     public List<User> allUsers() {
         return service.getUsers();
     }
 
     // 2. get user by id
-    @GetMapping("/user/{id}")
+    @GetMapping("/get/{id}")
     public User user(@PathVariable(value = "id") Integer id) {
         return service.getUser(id);
     }
