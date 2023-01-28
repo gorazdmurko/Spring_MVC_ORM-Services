@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+    <person id="1">
+        <id>1</id>
+        <firstname>Peter</firstname>
+        <lastname>Brown</lastname>
+        <occupation>programmer</occupation>
+    </person>
+<!--    <person id="2">-->
+<!--        <id>2</id>-->
+<!--        <firstname>Martin</firstname>-->
+<!--        <lastname>Smith</lastname>-->
+<!--        <occupation>accountant</occupation>-->
+<!--    </person>-->
+<!--    <person id="3">-->
+<!--        <id>3</id>-->
+<!--        <firstname>Lucy</firstname>-->
+<!--        <lastname>Gordon</lastname>-->
+<!--        <occupation>teacher</occupation>-->
+<!--    </person>-->
+</persons>

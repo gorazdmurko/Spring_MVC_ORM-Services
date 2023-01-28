@@ -1,0 +1,11 @@
+body {
+    background-color: black;
+    color: orange;
+}
+tr {
+    margin: 1vh;
+    font-size: 2vh;
+}
+input {
+    background: darkgray;
+}
