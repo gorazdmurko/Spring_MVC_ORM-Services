@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Success</title>
@@ -22,8 +23,12 @@
     <h3>State: ${savedStudent.address.state}</h3>
     <h3>Zip Code: ${savedStudent.address.zipcode}</h3>
     <h3>XML: ${savedStudent.content}</h3>
-<%--    <h3>Profile Image: <img width="30%" height="30%" src="<spring:url value='${savedStudent.image}' />"></h3>--%>
-<%--    <p>Profile Image: <img width="30%" height="30%" src="<spring:url value='/resources/images/${savedStudent.image.originalFilename}' />"></p>--%>
+
+    <c:if test="${not empty encodedImage}">
+        <div align="center" style="margin-top: 2em">
+            <img src="${encodedImage}" alt=\"\" height=\"230\" width=\"390\" />
+        </div>
+    </c:if>
 
 </body>
 </html>

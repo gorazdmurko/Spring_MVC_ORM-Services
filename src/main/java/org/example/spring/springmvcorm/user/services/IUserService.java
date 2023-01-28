@@ -13,4 +13,10 @@ public interface IUserService {
     // AJAX & jQuery
     User getUser(Integer id);
 
+    void updateUser(User user);
+
+    void updateById(Integer id, User user);
+
+    void deleteById(Integer id);
+
 }

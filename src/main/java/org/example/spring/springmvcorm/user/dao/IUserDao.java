@@ -12,4 +12,10 @@ public interface IUserDao {
 
     // AJAX & jQuery
     User findUser(Integer id);
+
+    void updateUser(User user);
+
+    void updateById(Integer id, User user);
+
+    void deleteById(Integer id);
 }

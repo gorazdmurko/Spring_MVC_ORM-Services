@@ -4,7 +4,6 @@ import org.example.spring.springmvcorm.user.dao.IUserDao;
 import org.example.spring.springmvcorm.user.entity.User;
 import org.example.spring.springmvcorm.user.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +34,25 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUser(Integer id) {
         return dao.findUser(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        dao.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateById(Integer id, User user) {
+        dao.updateById(id, user);
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        dao.deleteById(id);
     }
 
     public IUserDao getDao() {

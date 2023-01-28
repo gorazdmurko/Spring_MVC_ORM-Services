@@ -16,9 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 // https://github.com/TinaXing2012/Spring/tree/master/SpringValidationXML/src/main/java/xing/rujuan
 // https://www.youtube.com/watch?v=U5JXDnMJVyo&ab_channel=MissXing
@@ -33,6 +37,7 @@ public class StudentUploadController {
     ServletContext servletContext;
 
     private String STUDENT_FORM_VIEW = "studentForm";
+    private String STUDENT_FORM_VIEW_2 = "studentForm_2";
     private String STUDENT_DETAILS_REDIRECT = "/student/studentDetails";
     private String SUCCESS_VIEW = "success";
     private String ERROR_VIEW = "error";
@@ -48,7 +53,7 @@ public class StudentUploadController {
     @GetMapping("/addStudent")
     public String getStudentForm(@ModelAttribute("student") Student student, Model model) {
         System.out.println("Second controller called");
-        return STUDENT_FORM_VIEW;
+        return STUDENT_FORM_VIEW_2;
     }
 
     // called by spring form
@@ -78,7 +83,11 @@ public class StudentUploadController {
         System.out.println("STUDENT: " + student);
         System.out.println("XML: " + student.getContent());
 
+        // image
+        String encodedImage = encodeUploadedImage(bufferedImage);
+        redirectAttributes.addFlashAttribute("encodedImage", encodedImage);
         redirectAttributes.addFlashAttribute("savedStudent", student);
+
         return "redirect:" + STUDENT_DETAILS_REDIRECT;
 
     }
@@ -140,9 +149,23 @@ public class StudentUploadController {
         model.addAttribute("multipart", student.getMultipartFile());
         model.addAttribute("mediaType", student.getMediaType());
 
-        redirectAttributes.addFlashAttribute("savedStudent", student);
-        return "redirect:/student/studentDetails";
+        // image
+        String encodedImage = encodeUploadedImage(bufferedImage);
 
+        redirectAttributes.addFlashAttribute("encodedImage", encodedImage);
+        redirectAttributes.addFlashAttribute("savedStudent", student);
+
+        return "redirect:/student/studentDetails";
+    }
+
+    private String encodeUploadedImage(BufferedImage bufferedImage) throws IOException {
+        ImageIO.write(bufferedImage,"png",new File("tmpImage.png"));
+        byte[] imageBytes = Files.readAllBytes(Paths.get("tmpImage.png"));
+        Base64.Encoder encoder = Base64.getEncoder();
+
+        String encoding = "data:image/png;base64," + encoder.encodeToString(imageBytes);
+
+        return encoding;
     }
 }
 

@@ -48,7 +48,7 @@
         </div>
         <div>
             <form:form action="student/addStudent" method="GET">
-                <input type="submit" name="student" value="STUDENT FORM 2" class="inputButton" />
+                <input type="submit" name="student" value="STUDENT FORM (image)" class="inputButton" />
             </form:form>
         </div>
         <div>
