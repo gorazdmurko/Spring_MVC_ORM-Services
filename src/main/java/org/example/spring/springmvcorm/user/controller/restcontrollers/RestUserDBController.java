@@ -16,19 +16,19 @@ public class RestUserDBController {
     @Autowired
     private IUserService service;
 
-    // 1. get list of all users
+    // 1. GET list of all users
     @GetMapping("/get")
     public List<User> allUsers() {
         return service.getUsers();
     }
 
-    // 2. get user by id
+    // 2. GET user by id    =>  http://localhost:8282/Spring_MVC_ORM/user/get/6     or     http://localhost:8282/Spring_MVC_ORM/user/get/?id=6
     @GetMapping("/get/{id}")
     public User user(@PathVariable(value = "id") Integer id) {
         return service.getUser(id);
     }
 
-    // 3. post user
+    // 3. create (POST) user
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public User createUser(@RequestBody User postedUser) {
 
@@ -52,23 +52,55 @@ public class RestUserDBController {
         return userToCreate;
     }
 
-    // 4. update user
+    // 4. UPDATE user (based on its body)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public void updateUser(@RequestBody User userToUpdate) {
-        service.updateUser(userToUpdate);
+        boolean isUser = checkIfIdExists(userToUpdate.getId());
+        if (isUser) {
+            service.updateUser(userToUpdate);
+        }
     }
 
-    // 5. update user by id
+    // 5. UPDATE a list users
+    @RequestMapping(value = "/updateList", method = RequestMethod.PUT)
+    public void updateListOfUsers(@RequestBody List<User> usersList) {
+        for (User user : usersList) {
+            boolean isUser = checkIfIdExists(user.getId());
+            if (isUser) {
+                service.updateUser(user);
+            }
+        }
+    }
+
+    // 6. UPDATE user by id
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public void updateUserById(@PathVariable("id") Integer id, @RequestBody User userToUpdate) {
-        service.updateById(id, userToUpdate);
+        boolean isUser = checkIfIdExists(id);
+        if (isUser) {
+            service.updateById(id, userToUpdate);
+        }
     }
 
-    // 6. delete user by id
+    // 7. DELETE user by id
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public User deleteUserById(@PathVariable("id") Integer id) {
-        User user = service.getUser(id);
-        service.deleteById(id);
+        User user = null;
+        boolean isUser = checkIfIdExists(id);
+        if (isUser) {
+            user = service.getUser(id);
+            service.deleteById(id);
+        }
+
         return user;
+    }
+
+    // validation
+    private boolean checkIfIdExists(Integer id) {
+        boolean isUser = false;
+        User user = service.getUser(id);
+        if (user != null) {
+            isUser = true;
+        }
+        return isUser;
     }
 }

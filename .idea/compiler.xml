@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MVC_ORM" />
-        <module name="17_Spring_MVC_ORM_updated" />
         <module name="Spring_MVC_ORM" />
+        <module name="17_Spring_MVC_ORM_updated" />
+        <module name="Spring-Services-API" />
       </profile>
     </annotationProcessing>
   </component>

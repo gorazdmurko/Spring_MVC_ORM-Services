@@ -52,7 +52,7 @@
             </form:form>
         </div>
         <div>
-            <form:form action="employee/viewRegistrationForm" method="GET">
+            <form:form action="employee/viewRegistrationForm2" method="GET">
                 <input type="submit" name="employee" value="EMPLOYEE FORM" class="inputButton" />
             </form:form>
         </div>
