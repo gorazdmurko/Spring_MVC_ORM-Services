@@ -17,14 +17,23 @@ public class RestUserDBController {
     private IUserService service;
 
     // 1. GET list of all users
+    @CrossOrigin
     @GetMapping("/get")
     public List<User> allUsers() {
         return service.getUsers();
     }
 
     // 2. GET user by id    =>  http://localhost:8282/Spring_MVC_ORM/user/get/6     or     http://localhost:8282/Spring_MVC_ORM/user/get/?id=6
+    @CrossOrigin
     @GetMapping("/get/{id}")
     public User user(@PathVariable(value = "id") Integer id) {
+        return service.getUser(id);
+    }
+
+    // 2. b) GET user by id    =>  http://localhost:8282/Spring_MVC_ORM/user/get/6     or     http://localhost:8282/Spring_MVC_ORM/user/get/?id=6
+    @CrossOrigin
+    @GetMapping("/get/")
+    public User userByParam(@RequestParam(value = "inputId") Integer id) {
         return service.getUser(id);
     }
 

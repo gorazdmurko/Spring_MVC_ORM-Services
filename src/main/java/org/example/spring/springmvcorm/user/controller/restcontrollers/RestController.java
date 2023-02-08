@@ -23,7 +23,7 @@ public class RestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/rest-students/id/{id}", method = RequestMethod.GET)    // restApi/rest-students/TheGreatKali
+    @RequestMapping(value = "/rest-students/id/{id}", method = RequestMethod.GET)
     public RestStudent getStudentById(@PathVariable int id) {
 
         List<RestStudent> studentsList = getStudents();
@@ -37,7 +37,7 @@ public class RestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/rest-students/name/{name}", method = RequestMethod.GET)    // restApi/rest-students/TheGreatKali
+    @RequestMapping(value = "/rest-students/name/{name}", method = RequestMethod.GET)
     public RestStudent getStudentByName(@PathVariable String name) {
 
         List<RestStudent> studentsList = getStudents();
