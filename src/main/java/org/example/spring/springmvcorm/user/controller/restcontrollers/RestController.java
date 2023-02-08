@@ -1,10 +1,12 @@
 package org.example.spring.springmvcorm.user.controller.restcontrollers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.spring.springmvcorm.user.dto.RestStudent;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
 
 
 @org.springframework.web.bind.annotation.RestController
@@ -111,5 +113,49 @@ public class RestController {
         }
 
         return studentsList;
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // TEST: Map -> JSON    --> returns ResponseEntity
+    @ResponseBody
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ResponseEntity<String> test(@RequestParam String id, @RequestParam String name) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", String.valueOf(id));
+        map.put("name", name);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = null;
+
+        try {
+            json = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok(json);
+    }
+
+    // TEST: Map -> JSON    --> returns String
+    @ResponseBody
+    @RequestMapping(value = "/test123", method = RequestMethod.GET)
+    public String test123(@RequestParam String id, @RequestParam String name) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", String.valueOf(id));
+        map.put("name", name);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = null;
+
+        try {
+            json = mapper.writer().withDefaultPrettyPrinter().writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(json);
+
+        return json;
     }
 }
